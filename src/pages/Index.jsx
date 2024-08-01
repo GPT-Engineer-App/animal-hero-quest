@@ -1,23 +1,22 @@
 import React, { useState, useEffect } from 'react';
+import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
 
 const animals = [
-  { name: 'Cow', image: 'https://source.unsplash.com/featured/?cow' },
-  { name: 'Dog', image: 'https://source.unsplash.com/featured/?dog' },
-  { name: 'Cat', image: 'https://source.unsplash.com/featured/?cat' },
-  { name: 'Horse', image: 'https://source.unsplash.com/featured/?horse' },
-  { name: 'Pig', image: 'https://source.unsplash.com/featured/?pig' },
-  { name: 'Sheep', image: 'https://source.unsplash.com/featured/?sheep' },
-  { name: 'Chicken', image: 'https://source.unsplash.com/featured/?chicken' },
-  { name: 'Duck', image: 'https://source.unsplash.com/featured/?duck' },
+  { name: 'Cow', image: 'https://upload.wikimedia.org/wikipedia/commons/0/0c/Cow_female_black_white.jpg' },
+  { name: 'Dog', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Cute_dog.jpg/640px-Cute_dog.jpg' },
+  { name: 'Cat', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/640px-Cat03.jpg' },
+  { name: 'Horse', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Nokota_Horses_cropped.jpg/640px-Nokota_Horses_cropped.jpg' },
+  { name: 'Pig', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Pink_pig_sus_scrofa_domesticus.jpg/640px-Pink_pig_sus_scrofa_domesticus.jpg' },
+  { name: 'Sheep', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Flock_of_sheep.jpg/640px-Flock_of_sheep.jpg' },
+  { name: 'Chicken', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/%E0%B0%95%E0%B1%8B%E0%B0%A1%E0%B0%BF_%E0%B0%AA%E0%B0%BF%E0%B0%B2%E0%B1%8D%E0%B0%B2IMG20191207080730-01.jpg/640px-%E0%B0%95%E0%B1%8B%E0%B0%A1%E0%B0%BF_%E0%B0%AA%E0%B0%BF%E0%B0%B2%E0%B1%8D%E0%B0%B2IMG20191207080730-01.jpg' },
+  { name: 'Duck', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Bucephala-albeola-010.jpg/640px-Bucephala-albeola-010.jpg' },
 ];
 
 const Index = () => {
   const [score, setScore] = useState(0);
   const [currentAnimals, setCurrentAnimals] = useState([]);
   const [correctAnimal, setCorrectAnimal] = useState(null);
-  const [loadedImages, setLoadedImages] = useState({});
 
   const selectRandomAnimals = () => {
     const shuffled = [...animals].sort(() => 0.5 - Math.random());
@@ -39,11 +38,6 @@ const Index = () => {
       setScore(score + 1);
     }
     startNewRound();
-    setLoadedImages({});
-  };
-
-  const handleImageLoad = (animalName) => {
-    setLoadedImages(prev => ({ ...prev, [animalName]: true }));
   };
 
   return (
@@ -57,23 +51,16 @@ const Index = () => {
       </div>
       <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
         {currentAnimals.map((animal, index) => (
-          <Card 
-            key={index} 
-            className="p-4 cursor-pointer hover:shadow-lg transition-shadow"
-            onClick={() => handleAnimalClick(animal)}
-          >
-            <div className="w-full h-48 overflow-hidden rounded-lg relative">
-              {!loadedImages[animal.name] && (
-                <Skeleton className="absolute inset-0" />
-              )}
-              <img 
-                src={animal.image} 
-                alt={animal.name} 
-                className="mx-auto object-cover w-full h-full" 
-                onLoad={() => handleImageLoad(animal.name)}
-                style={{ display: loadedImages[animal.name] ? 'block' : 'none' }}
-              />
+          <Card key={index} className="p-4 flex flex-col items-center">
+            <div className="w-32 h-32 mb-4 overflow-hidden rounded-lg">
+              <img src={animal.image} alt={animal.name} className="mx-auto object-cover w-full h-full" />
             </div>
+            <Button
+              onClick={() => handleAnimalClick(animal)}
+              className="w-full"
+            >
+              {animal.name}
+            </Button>
           </Card>
         ))}
       </div>

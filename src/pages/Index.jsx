@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Card } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const animals = [
   { name: 'Cow', image: 'https://upload.wikimedia.org/wikipedia/commons/0/0c/Cow_female_black_white.jpg' },
@@ -60,6 +61,40 @@ const Index = () => {
             </div>
           </Card>
         ))}
+      </div>
+      <div className="mt-12">
+        <Tabs defaultValue="cow" className="w-full">
+          <TabsList className="grid w-full grid-cols-4 mb-4">
+            <TabsTrigger value="cow">Cow</TabsTrigger>
+            <TabsTrigger value="dog">Dog</TabsTrigger>
+            <TabsTrigger value="cat">Cat</TabsTrigger>
+            <TabsTrigger value="horse">Horse</TabsTrigger>
+          </TabsList>
+          <TabsContent value="cow">
+            <Card className="p-6">
+              <h3 className="text-2xl font-bold mb-2">Cow</h3>
+              <p>Cows are domesticated cattle known for producing milk and meat. They are herbivores and have a complex digestive system with four stomachs.</p>
+            </Card>
+          </TabsContent>
+          <TabsContent value="dog">
+            <Card className="p-6">
+              <h3 className="text-2xl font-bold mb-2">Dog</h3>
+              <p>Dogs are domesticated mammals, known as man's best friend. They come in various breeds and are often kept as pets or working animals.</p>
+            </Card>
+          </TabsContent>
+          <TabsContent value="cat">
+            <Card className="p-6">
+              <h3 className="text-2xl font-bold mb-2">Cat</h3>
+              <p>Cats are small carnivorous mammals that are often kept as house pets. They are known for their independent nature and grooming habits.</p>
+            </Card>
+          </TabsContent>
+          <TabsContent value="horse">
+            <Card className="p-6">
+              <h3 className="text-2xl font-bold mb-2">Horse</h3>
+              <p>Horses are large domesticated mammals used for transportation, sport, and work. They are herbivores and have been companions to humans for thousands of years.</p>
+            </Card>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );

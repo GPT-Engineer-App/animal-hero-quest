@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
 const animals = [
@@ -51,16 +50,14 @@ const Index = () => {
       </div>
       <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
         {currentAnimals.map((animal, index) => (
-          <Card key={index} className="p-4 flex flex-col items-center">
-            <div className="w-32 h-32 mb-4 overflow-hidden rounded-lg">
+          <Card 
+            key={index} 
+            className="p-4 cursor-pointer hover:shadow-lg transition-shadow"
+            onClick={() => handleAnimalClick(animal)}
+          >
+            <div className="w-full h-48 overflow-hidden rounded-lg">
               <img src={animal.image} alt={animal.name} className="mx-auto object-cover w-full h-full" />
             </div>
-            <Button
-              onClick={() => handleAnimalClick(animal)}
-              className="w-full"
-            >
-              {animal.name}
-            </Button>
           </Card>
         ))}
       </div>
